@@ -1,0 +1,22 @@
+.bs-controller {
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    background-color: gray;
+    z-index: 2000000001;
+    border: solid 3px black;
+}
+
+.bs-controller__row {
+    display: flex;
+}
+
+.bs-controller__label {
+    margin: auto;
+    color: white;
+}
+
+.bs-controller__button {
+    margin: 3px;
+    flex: 1 1 auto;
+}
