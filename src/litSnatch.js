@@ -5,7 +5,7 @@
 // @include  https://litnet.com/*
 // ==/UserScript==
 (async () => {
-  
+
     const getPartFrom = (s, an) => {
         return s.slice(s.lastIndexOf(an) + 1);
     }
@@ -14,8 +14,8 @@
         console.log('waiting...');
         await new Promise(resolve => setTimeout(resolve, 2000));
     }
-	
-		const pause = async () => {
+
+    const pause = async () => {
         console.log('pause...');
         await new Promise(resolve => setTimeout(resolve, 10000));
     }
@@ -33,7 +33,7 @@
     }
 
     const saveText = (text) => {
-        const data = new Blob([text], {type: 'text/plain'});
+        const data = new Blob([text], { type: 'text/plain' });
         const url = window.URL.createObjectURL(data);
         const fakeAnchor = document.createElement('a');
 
@@ -42,12 +42,12 @@
         const filename = `${bookname}_${chapterId}.html`;
         console.log(`saving to: ${filename}`);
         fakeAnchor.setAttribute('download', filename);
-        fakeAnchor.href = url; 
+        fakeAnchor.href = url;
         fakeAnchor.click();
     }
 
     const getButtonNext = () => {
-        const result =  $('.reader-pagination a.pull-right').first();
+        const result = $('.reader-pagination a.pull-right').first();
         return result;
     }
 
@@ -69,10 +69,10 @@
     const isEndOfBook = () => {
         return getButtonNext().size() == 0;
     }
-    
-    if ((!!localStorage.getItem('stopProcessing')))) {
-				console.log("No actions");
-				return;
+
+    if ((!!localStorage.getItem('stopProcessing'))) {
+        console.log("No actions");
+        return;
     }
 
     try {
@@ -86,10 +86,10 @@
             if ((!!localStorage.getItem('stopProcessing')) || (!!unsafeWindow['stopProcessing'])) {
                 break;
             }
-            
+
             //const pageLabel = `<p style="text-align: center">${pageCount}</p>`;
             console.log(`page ${pageCount}`);
-            
+
             await delay();
             const pageBody = getPageBody();
             if (prevPageBody === pageBody) {
@@ -97,9 +97,9 @@
                 location.reload();
 
             }
-            
+
             //pages.push(pageLabel + pageBody);
-						pages.push(pageBody);
+            pages.push(pageBody);
             prevPageBody = pageBody;
             if (isLastPageOfChapter()) {
                 console.log('Last page of chapter reached');
@@ -108,7 +108,7 @@
 
             pageCount++;
             nextPage();
-        } while(true);
+        } while (true);
 
         const chapterText = pages.join('');
         saveText(chapterText);
@@ -119,10 +119,10 @@
         } else {
             nextChapter();
         }
-    } catch(e){
+    } catch (e) {
         console.error(e);
         await pause();
         location.reload();
     }
-  
+
 })();
