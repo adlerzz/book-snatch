@@ -11,10 +11,16 @@
     display: flex;
 }
 
+.bs-controller__pad{
+    display: flex;
+    width: 100%;
+}
+
 .bs-controller__label {
     margin: auto;
     color: white;
     font-size: 16px;
+    padding: 10px;
 }
 
 .bs-controller__button {
