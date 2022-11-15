@@ -57,6 +57,7 @@ window.CBS = (() => {
         fakeAnchor.click();
 
         await delay(500);
+        window.URL.revokeObjectURL(url);
     }
 
 
