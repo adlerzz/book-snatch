@@ -1,9 +1,10 @@
 window.CBS = (() => {
-    const test = () => {
-        console.log('test called');
-    }
 
     const cssUrl = 'https://raw.githubusercontent.com/adlerzz/book-snatch/main/src/bs-controller.css';
+
+    const delay = async (ms) => {
+        await new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     const cssLoad = async () => {
     
@@ -45,7 +46,7 @@ window.CBS = (() => {
         pad.append(buttonStop);
     }
 
-    const saveText = (text, filename) => {
+    const saveText = async (text, filename) => {
         const data = new Blob([text], {type: 'text/plain'});
         const url = window.URL.createObjectURL(data);
         const fakeAnchor = document.createElement('a');
@@ -54,10 +55,12 @@ window.CBS = (() => {
         fakeAnchor.setAttribute('download', filename);
         fakeAnchor.href = url; 
         fakeAnchor.click();
+
+        await delay(500);
     }
 
 
     return ({
-        test, renderControlPad, saveText
+        delay, renderControlPad, saveText
     });
 })();
