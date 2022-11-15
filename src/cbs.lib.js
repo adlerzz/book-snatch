@@ -43,7 +43,7 @@ window.CBS = (() => {
         const buttonStop = $('<button class="bs-controller__button">Stop</button>');
         buttonStop.click(() => {stop()});
         pad.append(buttonStop);
-    };
+    }
 
     const saveText = (text, filename) => {
         const data = new Blob([text], {type: 'text/plain'});
@@ -59,5 +59,5 @@ window.CBS = (() => {
 
     return ({
         test, renderControlPad, saveText
-    })
+    });
 })();
