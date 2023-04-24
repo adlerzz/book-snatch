@@ -53,36 +53,28 @@
     }
 
     const nextChapter = () => {
-			const link = $('.navigation > *').last();
-      if(link.is('a')){
-        return link.attr('href');
-      } else {
-        return null;
-      }
+        const link = $('.navigation > *').last();
+        return link.is('a') ? link.attr('href') : null;
     }
-    
+
     const extractText = () => {
-      return [...$('div.MsoNormal').find('p.MsoNormal,div.take_h1')].map((el) => el.outerHTML).join('');
+        const allTextElements = $('div.MsoNormal').find('p.MsoNormal,div.take_h1');
+        return [...allTextElements].map((el) => el.outerHTML).join('');
     }
-    
+
     const extractChapter = () => {
-      return location.search.slice(1) + '.html';
+        return location.search.slice(1) + '.html';
     }
-    
+
     const iteration = async () => {
-        console.log('doIteration');
         const run = JSON.parse(localStorage.getItem(RUN_KEY));
         if (!run) {
-            console.log('no run');
             return;
         }
-        console.log('do wait');
         await delay(500);
-        console.log('do extract');
         const text = extractText();
         saveText(extractText(), extractChapter());
         await delay(500);
-        console.log('do next');
         const next = nextChapter();
         if (next) {
             location.assign(next);
@@ -91,8 +83,8 @@
 
     const doStart = async () => {
         localStorage.setItem(RUN_KEY, true);
-      	await iteration();
-       
+        await iteration();
+
     }
 
     const doStop = () => {
@@ -101,7 +93,7 @@
 
 
     controlsRender([doStart, doStop]);
-  
-  	await iteration();
 
-})()
+    await iteration();
+
+})();
